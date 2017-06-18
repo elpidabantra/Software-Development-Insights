@@ -1,0 +1,152 @@
+
+
+
+
+from functools import wraps
+import threading
+
+import tensorflow as tf
+import numpy as np
+from tensorflow.python.platform import tf_logging as logging
+
+from hyperparams import hyperparams as hp
+from utils import *
+from prepro import *
+
+
+
+def producer_func(func):
+    
+    @wraps(func)
+    def wrapper(inputs, dtypes, capacity, num_threads):
+        
+        
+        def enqueue_func(sess, op):
+            
+            data = func(sess.run(inputs))
+            
+            feed_dict = {}
+            for ph, col in zip(placeholders, data):
+                feed_dict[ph] = col
+            
+            sess.run(op, feed_dict=feed_dict)
+
+        
+        placeholders = []
+        for dtype in dtypes:
+            placeholders.append(tf.placeholder(dtype=dtype))
+
+        
+        queue = tf.fifoqueue(capacity, dtypes=dtypes)
+
+        
+        enqueue_op = queue.enqueue(placeholders)
+
+        
+        runner = _funcqueuerunner(enqueue_func, queue, [enqueue_op] * num_threads)
+
+        
+        tf.train.add_queue_runner(runner)
+
+        
+        return queue.dequeue()
+
+    return wrapper
+
+
+class _funcqueuerunner(tf.train.queuerunner):
+
+    def __init__(self, func, queue=none, enqueue_ops=none, close_op=none,
+                 cancel_op=none, queue_closed_exception_types=none,
+                 queue_runner_def=none):
+        
+        self.func = func
+        
+        super(_funcqueuerunner, self).__init__(queue, enqueue_ops, close_op, cancel_op,
+                                               queue_closed_exception_types, queue_runner_def)
+
+    
+    def _run(self, sess, enqueue_op, coord=none):
+
+        if coord:
+            coord.register_thread(threading.current_thread())
+        decremented = false
+        try:
+            while true:
+                if coord and coord.should_stop():
+                    break
+                try:
+                    self.func(sess, enqueue_op)  
+                except self._queue_closed_exception_types:  
+                    
+                    with self._lock:
+                        self._runs_per_session[sess] -= 1
+                        decremented = true
+                        if self._runs_per_session[sess] == 0:
+                            try:
+                                sess.run(self._close_op)
+                            except exception as e:
+                                
+                                logging.vlog(1, "ignored exception: %s", str(e))
+                        return
+        except exception as e:
+            
+            if coord:
+                coord.request_stop(e)
+            else:
+                logging.error("exception in queuerunner: %s", str(e))
+                with self._lock:
+                    self._exceptions_raised.append(e)
+                raise
+        finally:
+            
+            if not decremented:
+                with self._lock:
+                    self._runs_per_session[sess] -= 1
+                    
+def get_batch():
+    
+    with tf.device('/cpu:0'):
+        
+        texts, sound_files = load_train_data() 
+        
+        
+        num_batch = len(texts) // hp.batch_size
+         
+        
+        texts = tf.convert_to_tensor(texts)
+        sound_files = tf.convert_to_tensor(sound_files)
+         
+        
+        text, sound_file = tf.train.slice_input_producer([texts, sound_files], shuffle=true)
+
+        @producer_func
+        def get_text_and_spectrograms(_inputs):
+            
+            _text, _sound_file = _inputs
+            
+            
+            _text = np.fromstring(_text, np.int32) 
+            _spectrogram, _magnitude = get_spectrograms(_sound_file)
+             
+            _spectrogram = reduce_frames(_spectrogram, hp.r)
+            _magnitude = reduce_frames(_magnitude, hp.r)
+    
+            return _text, _spectrogram, _magnitude
+            
+        
+        x, y, z = get_text_and_spectrograms(inputs=[text, sound_file], 
+                                            dtypes=[tf.int32, tf.float32, tf.float32],
+                                            capacity=128,
+                                            num_threads=32)
+        
+        x, y, z = tf.train.batch([x, y, z],
+                                shapes=[(none,), (none, hp.n_mels*hp.r), (none, (1+hp.n_fft//2)*hp.r)],
+                                num_threads=32,
+                                batch_size=hp.batch_size, 
+                                capacity=hp.batch_size*32,   
+                                dynamic_pad=true)
+    return x, y, z, num_batch
+contact github api training shop blog about
+© 2017 github, inc. terms privacy security status help
+

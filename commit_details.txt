@@ -1,0 +1,150 @@
+/Users/elpidabantra/Desktop/tacotron/.git/
+/Users/elpidabantra/Desktop/tacotron/
+
+
+<subprocess.Popen object at 0x102f0b550>
+The commit message is load_eval_data error fixed
+1496405596
+Committed by Kyubyong Park longinglove@nate.com
+
+
+The commit message is device error fixed
+1496400582
+Committed by Kyubyong Park longinglove@nate.com
+
+
+The commit message is For multiple gpus
+
+1496384506
+Committed by ryan longinglove@nate.com
+
+
+The commit message is num_gpus added
+
+1496384455
+Committed by ryan longinglove@nate.com
+
+
+The commit message is Explanation on train_multiple_gpus.py added
+
+1496384408
+Committed by ryan longinglove@nate.com
+
+
+The commit message is Import error fixed
+
+1496384352
+Committed by ryan longinglove@nate.com
+
+
+The commit message is Merge pull request #20 from candlewill/patch-1
+
+fix import error
+1496375361
+Committed by Kyubyong Park longinglove@nate.com
+
+
+The commit message is fix import error
+
+data is refactored as prepro
+1496372320
+Committed by Yunchao He candlewill@users.noreply.github.com
+
+
+The commit message is Fixed typos
+
+1496308606
+Committed by ryan longinglove@nate.com
+
+
+The commit message is renamed
+1496308523
+Committed by Kyubyong Park longinglove@nate.com
+
+
+The commit message is Second draft - Refactored and modularized
+
+1496308401
+Committed by ryan longinglove@nate.com
+
+
+The commit message is Requirement update
+1496109864
+Committed by Kyubyong Park longinglove@nate.com
+
+
+The commit message is Merge pull request #11 from Spotlight0xff/residual_connection_fix
+
+Residual connection fix (and highway layer)
+1496017433
+Committed by Kyubyong Park longinglove@nate.com
+
+
+The commit message is Merge pull request #10 from Spotlight0xff/fix_prenet
+
+fixed prenet construction
+1496016194
+Committed by Kyubyong Park longinglove@nate.com
+
+
+The commit message is use tf.layers abstraction, added docstring
+
+1495976540
+Committed by Spotlight0xff spotlight0xff@gmail.com
+
+
+The commit message is use residual connection from *after* the prenet, not from before
+
+1495976540
+Committed by Spotlight0xff spotlight0xff@gmail.com
+
+
+The commit message is fixed prenet construction
+
+1495972010
+Committed by Spotlight0xff spotlight0xff@gmail.com
+
+
+The commit message is minor update
+1495071619
+Committed by Kyubyong Park longinglove@nate.com
+
+
+The commit message is First draft
+1495070742
+Committed by Kyubyong Park longinglove@nate.com
+
+
+The commit message is Data locatiion added
+
+1494911724
+Committed by ryan longinglove@nate.com
+
+
+The commit message is minor update
+
+1494910354
+Committed by ryan longinglove@nate.com
+
+
+The commit message is Delete README.md~
+1494894741
+Committed by Kyubyong Park longinglove@nate.com
+
+
+The commit message is Delete data.py~
+1494894732
+Committed by Kyubyong Park longinglove@nate.com
+
+
+The commit message is initial commit
+
+1494894461
+Committed by ryan longinglove@nate.com
+
+
+The commit message is Initial commit
+1494893767
+Committed by Kyubyong Park longinglove@nate.com
+
+

@@ -1,0 +1,12 @@
+the number of functions for the given author is given in the below line
+{'author': 7}
+the functions that he wrote are given in the list below
+[['', ' producer_func(func):\n'], ['    ', ' wrapper(inputs, dtypes, capacity, num_threads):\n'], ['        ', ' enqueue_func(sess, op):\n'], ['    ', ' __init__(self, func, queue=none, enqueue_ops=none, close_op=none,\n'], ['    ', ' _run(self, sess, enqueue_op, coord=none):\n'], ['', ' get_batch():\n'], ['        ', ' get_text_and_spectrograms(_inputs):\n']]
+the number of imports by the given author is given in the below line
+{'author': 8}
+the imported items are given below
+['wraps', 'threading', 'tensorflow', 'numpy', 'tf_logging', 'hyperparams', '*', '*']
+the number of classes by the given author is given in the below line
+{'author': 1}
+the names of the classes are given below
+[['', ' _funcqueuerunner(tf.train.queuerunner):\n']]

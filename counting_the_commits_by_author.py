@@ -1,0 +1,34 @@
+import sys
+import pygit2
+import re
+import string
+import subprocess
+import os
+
+
+commits_by_author = {}
+
+with open('noa.txt') as f1:
+	for author in f1:
+		commits_by_author[author] = 0;
+
+f1.close()
+	
+print(commits_by_author)	
+
+with open('commit_by_author.txt') as f2:
+	for author in f2:
+		commits_by_author[author] = commits_by_author[author] + 1 ;
+f2.close()
+
+
+f = open("number_of_commit_by_author.txt", 'w')
+sys.stdout = f
+
+
+
+print(commits_by_author)
+
+
+f.close()
+

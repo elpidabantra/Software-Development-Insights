@@ -1,0 +1,11 @@
+import library1
+
+from librari1 import function1
+
+
+def function1():
+	for i in range(0,9):
+		print(i)
+
+import library2
+import lybrary3

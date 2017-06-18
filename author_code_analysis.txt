@@ -1,0 +1,12 @@
+the number of functions for the given author is given in the below line
+{'author': 6}
+the functions that he wrote are given in the list below
+[['  ', ' __init__( self, *args, **kwds ):\n'], ['  ', ' error( self, msg ):\n'], ['    ', ' __init__( self,\n'], ['    ', ' conflict_handler(self, *args, **kwds):\n'], ['    ', ' process_include_metrics(self, include_metrics_str):\n'], ['', ' testpa( pa ):\n']]
+the number of imports by the given author is given in the below line
+{'author': 2}
+the imported items are given below
+['sys', 'optionparser,']
+the number of classes by the given author is given in the below line
+{'author': 11}
+the names of the classes are given below
+[['', ' MyOptionParser(OptionParser):\n'], ['  """Sub', ' OptionParser so I can override default error handler."""\n'], ['', ' ProcessArgsError( Exception ): pass\n'], ['', ' ProcessArgs( object ):\n'], ['                          help="list of metrics to include in run. This is a comma separated list of metric module names with no whitespace. Optionally, you can specify the ', ' name of the metric by following the module name with a colon (:) and the metric ', " name. (Default metrics are 'mccabe:McCabeMetric,sloc:SLOCMetric'. Default metric ", " name for metric module 'wxYz' is 'WxYzMetric' when only module name given -- note capitalized metric ", ' name.)" )\n'], ['                if len( s ) == 2:    # both metric ', ' and module name given\n'], ['                    # ', ' name by capitalizing first letter of module\n'], ['                    # ', ' name for module wxYz is WxYzMetric.\n'], ['      Module sloc contains metric ', ' SLOCMetric\n'], ['      Module mccabe contains metric ', ' McCabeMetric\n'], ['        print "\\tModule %s contains metric ', ' %s" % (m,n)\n']]
